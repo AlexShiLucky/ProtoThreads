@@ -1,9 +1,27 @@
-CFLAGS=-O -Wuninitialized -Werror
+CC := gcc
 
-all: example-codelock example-buffer example-small
+CSRC := example-small.c
+CSRC += example-codelock.c
+CSRC += example-buffer.c
 
-example-codelock: example-codelock.c pt.h lc.h
+CSRC += example-small-addrlabels.c
+CSRC += example-small-switch.c
 
-example-buffer: example-buffer.c pt.h lc.h
+OBJS := $(CSRC:%.c=%.o)
+iSRC := $(CSRC:%.c=%.i)
+BIN := $(CSRC:%.c=%)
 
-example-small: example-small.c pt.h lc.h
+CFLAGS = -O -Wuninitialized -Werror -g
+
+.PHONY: all
+all: $(BIN) $(iSRC)
+
+$(BIN): %:%.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(iSRC): %.i:%.c
+	$(CC) -E $(CFLAGS) $< -o $@
+
+.PHONY: clean
+clean:
+	rm -f $(BIN) $(TXT) $(OBJS)

@@ -1,0 +1,4 @@
+*.si4project
+
+*.o
+*.extc
