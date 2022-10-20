@@ -6,6 +6,7 @@ CSRCS-X += example-buffer.c
 
 CSRCS := example-small-addrlabels.c
 CSRCS += example-small-switch.c
+CSRCS += example-small-setjmp.c
 
 ISRCS-XA := $(CSRCS-X:%.c=%.addrlabels.i)
 ISRCS-XS := $(CSRCS-X:%.c=%.switch.i)
